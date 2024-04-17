@@ -14,7 +14,7 @@ class FileStorage:
             if key.startswith(cls):
                 derdict.update({key: dictionary[key]})
         return derdict if derdict else {}
-        
+
     def delete(self, obj=None):
         if obj:
             objects_dict = FileStorage.__objects
@@ -64,6 +64,6 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
