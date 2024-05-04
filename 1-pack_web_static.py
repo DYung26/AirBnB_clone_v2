@@ -3,9 +3,10 @@
 from fabric.api import local
 
 def do_pack():
+    local('mkdir -p versions')
     date = local('date +"%Y%m%d%H%M%S"', capture=True)
     folder = "/root/AirBnB_clone_v2/web_static"
-    archive = "web_static_{}.tgz".format(date)
+    archive = "versions/web_static_{}.tgz".format(date)
     result = local("tar -cvzf {} {}".format(archive, folder), capture=True)
 
     if result.succeeded:
