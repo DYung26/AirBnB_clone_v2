@@ -12,7 +12,7 @@ def do_pack():
 
     #for line in lines:
     #    print(line)
-    result = local("tar -cvzf {} {}".format(archive, folder), capture=True)
+    result = local("tar -cvzf {} {}".format(archive, folder))
 
     if result.succeeded:
         return archive
