@@ -3,7 +3,7 @@
 Using Fabric to distribut an archive to my web servers,
 using the function `do_deploy`
 """
-from fabric import env
+from fabric.state import env
 from fabric.api import local, put, connect
 import os
 
