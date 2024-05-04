@@ -9,7 +9,7 @@ import os
 
 env.hosts = ['34.207.64.86', '54.158.217.146']
 env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa.pub'
+env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_deploy(archive_path):
@@ -40,4 +40,5 @@ def do_deploy(archive_path):
             print("New version deployed")
         return True
     except Exception as e:
+        print(e)
         return False
