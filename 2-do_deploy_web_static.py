@@ -25,10 +25,10 @@ def do_deploy(archive_path):
             base_path = '/data/web_static/'
             put(archive_path, '/tmp/')
             run('mkdir  -p {0}releases/{1}'.format(base_path, filename))
-            run('tar -xzf {1} -C {0}releases/{2}'.format(base_path,
+            run('tar -xzf /tmp/{2}.tgz -C {0}releases/{2}'.format(base_path,
                                                            archive_path,
                                                            filename))
-            run('rm /tmp/{}'.format(archive_path))
+            run('rm /tmp/{}.tgz'.format(filename))
             run('mv {0}releases/{1}/web_static/* '
                   '{0}releases/{1}/'.format(base_path,
                                             filename))
