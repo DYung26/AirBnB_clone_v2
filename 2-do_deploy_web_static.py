@@ -3,6 +3,7 @@
 Using Fabric to distribut an archive to my web servers,
 using the function `do_deploy`
 """
+
 from fabric.state import env
 from fabric.api import local, put, run
 import os
@@ -26,17 +27,16 @@ def do_deploy(archive_path):
             put(archive_path, '/tmp/')
             run('mkdir -p {0}releases/{1}'.format(base_path, filename))
             run('tar -xzf /tmp/{2}.tgz -C {0}releases/{2}'.format(base_path,
-                                                           archive_path,
-                                                           filename))
+                                                                  archive_path,
+                                                                  filename))
             run('rm /tmp/{}.tgz'.format(filename))
             run('cp -r {0}releases/{1}/web_static/* '
-                  '{0}releases/{1}/'.format(base_path,
-                                            filename))
+                '{0}releases/{1}/'.format(base_path, filename))
             run('rm -rf {0}releases/{1}/web_static/'.format(base_path,
-                                                              filename))
+                                                            filename))
             run('rm -rf /data/web_static/current')
             run('ln -s {0}releases/{1} {0}current'.format(base_path,
-                                                            filename))
+                                                          filename))
             print("New version deployed")
         return True
     except Exception as e:
