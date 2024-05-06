@@ -29,7 +29,7 @@ def do_deploy(archive_path):
                                                            archive_path,
                                                            filename))
             run('rm /tmp/{}.tgz'.format(filename))
-            run('cp -r {0}releases/{1}/web_static/* '
+            run('mv {0}releases/{1}/web_static/* '
                   '{0}releases/{1}/'.format(base_path,
                                             filename))
             run('rm -rf {0}releases/{1}/web_static/'.format(base_path,
