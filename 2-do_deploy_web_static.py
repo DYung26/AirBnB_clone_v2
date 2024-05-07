@@ -15,7 +15,7 @@ env.hosts = ['34.207.64.86', '54.158.217.146']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
 
-do_pack()
+module.do_pack
 
 
 def do_deploy(archive_path):
