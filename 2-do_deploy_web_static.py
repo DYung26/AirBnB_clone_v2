@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Using Fabric to distribut an archive to my web servers,
+Using Fabric to distribute an archive to my web servers,
 using the function `do_deploy`
 """
 
@@ -30,9 +30,9 @@ def do_deploy(archive_path):
                                                  filename)).failed:
             return False
         if run('tar -xzf /tmp/{2}.tgz -C {0}releases/{2}'
-            .format(base_path,
-                    archive_path,
-                    filename)).failed:
+               ''.format(base_path,
+                         archive_path,
+                         filename)).failed:
             return False
         if run('rm /tmp/{}.tgz'.format(filename)).failed:
             return False
@@ -45,9 +45,8 @@ def do_deploy(archive_path):
             return False
         if run('rm -rf /data/web_static/current').failed:
             return False
-        if run('ln -s {0}releases/{1} {0}current'
-            .format(base_path,
-                    filename)).failed:
+        if run('ln -s {0}releases/{1} {0}current'.format(base_path,
+                                                         filename)).failed:
             return False
         print("New version deployed")
     return True
