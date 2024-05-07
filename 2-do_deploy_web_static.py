@@ -7,10 +7,14 @@ using the function `do_deploy`
 from fabric.state import env
 from fabric.api import local, put, run
 import os
+module_name = "1-pack_web_static"
+module = importlib.import_module(module_name)
 
 env.hosts = ['34.207.64.86', '54.158.217.146']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
+
+do_pack()
 
 
 def do_deploy(archive_path):
