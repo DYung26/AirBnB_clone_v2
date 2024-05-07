@@ -7,6 +7,7 @@ using the function `do_deploy`
 from fabric.state import env
 from fabric.api import local, put, run
 import os
+import importlib
 module_name = "1-pack_web_static"
 module = importlib.import_module(module_name)
 
