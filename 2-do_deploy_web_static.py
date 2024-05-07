@@ -6,6 +6,7 @@ using the function `do_deploy`
 
 from fabric.state import env
 from fabric.api import local, put, run
+from fabric.runners import Result
 import os
 
 env.hosts = ['34.207.64.86', '54.158.217.146']
