@@ -6,7 +6,6 @@ using the function `do_deploy`
 
 from fabric.state import env
 from fabric.api import local, put, run
-from fabric.runners import Result
 import os
 
 env.hosts = ['34.207.64.86', '54.158.217.146']
@@ -26,10 +25,10 @@ def do_deploy(archive_path):
         base_path = '/data/web_static/'
         if put(archive_path, '/tmp/').failed:
             return False
-        if run('mkdir -p {0}releases/{1}'.format(base_path,
+        if run('mkdir -p {0}releases/{1}/'.format(base_path,
                                                  filename)).failed:
             return False
-        if run('tar -xzf /tmp/{2}.tgz -C {0}releases/{2}'
+        if run('tar -xzf /tmp/{2}.tgz -C {0}releases/{2}/'
                ''.format(base_path,
                          archive_path,
                          filename)).failed:
@@ -40,7 +39,7 @@ def do_deploy(archive_path):
                '{0}releases/{1}/'.format(base_path,
                                          filename)).failed:
             return False
-        if run('rm -rf {0}releases/{1}/web_static/'.format(base_path,
+        if run('rm -rf {0}releases/{1}/web_static'.format(base_path,
                                                            filename)).failed:
             return False
         if run('rm -rf /data/web_static/current').failed:
