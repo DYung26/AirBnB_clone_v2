@@ -50,6 +50,6 @@ def do_deploy(archive_path):
         return False
     if run('ln -s {0}releases/{1} {0}current'.format(base_path,
                                                      filename)).failed:
-       return False
-    print("New version deployed")
+        return False
+    print("New version deployed!")
     return True
