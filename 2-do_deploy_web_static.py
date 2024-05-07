@@ -17,26 +17,29 @@ def do_deploy(archive_path):
     """
         Distributes an archive to my web servers
     """
-    try:
-        for host in env.hosts:
-            if not os.path.exists(archive_path):
-                return False
-            filename = archive_path.replace("versions/",
-                                            "").replace(".tgz", "").strip()
-            base_path = '/data/web_static/'
-            put(archive_path, '/tmp/')
-            run('mkdir -p {0}releases/{1}'.format(base_path, filename))
-            run('tar -xzf /tmp/{2}.tgz -C {0}releases/{2}'.format(base_path,
-                                                                  archive_path,
-                                                                  filename))
-            run('rm /tmp/{}.tgz'.format(filename))
-            run('cp -r {0}releases/{1}/web_static/* '
-                '{0}releases/{1}/'.format(base_path, filename))
-            run('rm -rf {0}releases/{1}/web_static/'.format(base_path,
-                                                            filename))
-            run('rm -rf /data/web_static/current')
-            run('ln -s {0}releases/{1} {0}current'.format(base_path,
-                                                          filename))
-        return True
-    except Exception as e:
-        return False
+    for host in env.hosts:
+        if not os.path.exists(archive_path):
+            return False
+        filename = archive_path.replace("versions/",
+                                        "").replace(".tgz", "").strip()
+        base_path = '/data/web_static/'
+        return False if put(archive_path, '/tmp/').failed
+        return False if run('mkdir -p {0}releases/{1}'.format(base_path,
+                                                              filename)).failed
+        return False if run('tar -xzf /tmp/{2}.tgz -C {0}releases/{2}'
+                            ''.format(base_path,
+                                      archive_path,
+                                      filename)).failed
+        return False if run('rm /tmp/{}.tgz'.format(filename)).failed
+        return False if run('cp -r {0}releases/{1}/web_static/* '
+                            '{0}releases/{1}/'.format(base_path,
+                                                      filename)).failed
+        return False if run('rm -rf {0}releases/{1}/web_static/'
+                            ''.format(base_path,
+                                      filename)).failed
+        return False if run('rm -rf /data/web_static/current').failed
+        return False if run('ln -s {0}releases/{1} {0}current'
+                        .format(base_path,
+                                filename))
+        print("New version deployed")
+    return True
